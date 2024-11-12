@@ -1,0 +1,83 @@
+DROP TABLE IF EXISTS Admin_List CASCADE;
+CREATE TABLE Admin_List(
+    admin_ID INT PRIMARY KEY,
+    admin_Name VARCHAR(255) NOT NULL,
+    admin_Email VARCHAR(255)
+);
+
+DROP TABLE IF EXISTS User_List CASCADE;
+CREATE TABLE User_List(
+    user_ID INT PRIMARY KEY,
+    user_Name VARCHAR(255) NOT NULL,
+    user_Email VARCHAR(255)
+);
+
+DROP TABLE IF EXISTS Request_List CASCADE;
+CREATE TABLE Request_List(
+    request_ID INT PRIMARY KEY,
+    request_Comment TEXT,
+    request_Approval BOOL,
+    admin_ID INT,
+    FOREIGN KEY(admin_ID) REFERENCES Admin_List(admin_ID)
+);
+
+DROP TABLE IF EXISTS Location_List CASCADE;
+CREATE TABLE Location_List(
+    location_ID INT PRIMARY KEY,
+    location_Name VARCHAR(255) NOT NULL,
+    location_Address VARCHAR(255),
+    location_Capacity INT
+);
+
+DROP TABLE IF EXISTS When_List CASCADE;
+CREATE TABLE When_List(
+    when_ID INT PRIMARY KEY,
+    time_Start TIMESTAMP,
+    time_End TIMESTAMP,
+    CHECK (time_End > time_Start)
+);
+
+DROP TABLE IF EXISTS Location_When CASCADE;
+CREATE TABLE Location_When(
+    location_when_ID INT PRIMARY KEY,
+    location_ID INT,
+    FOREIGN KEY(location_ID) REFERENCES Location_List(location_ID),
+    when_ID INT,
+    FOREIGN KEY(when_ID) REFERENCES When_List(when_ID)
+);
+
+DROP TABLE IF EXISTS Event_Aggregation CASCADE;
+CREATE TABLE Event_Aggregation(
+    event_ID serial,
+    PRIMARY KEY(event_ID),
+    event_Name VARCHAR(255) NOT NULL,
+    event_Description TEXT,
+    participant_Limit INT,
+    approval BOOL,
+    organizer_ID INT NOT NULL,
+    FOREIGN KEY(organizer_ID) REFERENCES User_List(user_ID),
+    request_ID INT,
+    FOREIGN KEY(request_ID) REFERENCES Request_List(request_ID),
+    location_when_ID INT UNIQUE,
+    FOREIGN KEY(location_when_ID) REFERENCES Location_When(location_when_ID)
+);
+
+DROP TABLE IF EXISTS Notification_List CASCADE;
+CREATE TABLE Notification_List (
+    notification_ID INT,
+    notification_Title VARCHAR(255),
+    notification_Content TEXT,
+    post_Time TIMESTAMP,
+    event_ID INT,
+    FOREIGN KEY (event_ID) REFERENCES Event_Aggregation(event_ID),
+    PRIMARY KEY (event_ID, notification_ID)
+);
+
+DROP TABLE IF EXISTS User_Event CASCADE;
+CREATE TABLE User_Event (
+    user_ID INT,
+    event_ID INT,
+    FOREIGN KEY (user_ID) REFERENCES User_List(user_ID),
+    FOREIGN KEY (event_ID) REFERENCES Event_Aggregation(event_ID),
+    PRIMARY KEY (user_ID, event_ID)
+);

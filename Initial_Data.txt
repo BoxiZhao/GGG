@@ -1,0 +1,116 @@
+TRUNCATE TABLE Admin_List CASCADE;
+TRUNCATE TABLE User_List CASCADE;
+TRUNCATE TABLE Location_List CASCADE;
+TRUNCATE TABLE When_List CASCADE;
+TRUNCATE TABLE Request_List CASCADE;
+TRUNCATE TABLE Location_When CASCADE;
+TRUNCATE TABLE Event_Aggregation CASCADE;
+TRUNCATE TABLE Notification_List CASCADE;
+TRUNCATE TABLE User_Event CASCADE;
+
+INSERT INTO Admin_List VALUES
+(1, '闭社管理员', 'closed_social@thu.closed.social'), (2, '驰雨Chiyuru', 'chiyuru@thu.closed.social'), 
+(3, 'Novacaine', 'lethedryad@thu.closed.social'), (4, '欧醚', 'zyn@thu.closed.social'), 
+(5, '茨月', 'CiYue@thu.closed.social'), (6, '𝐓𝐞𝐝𝐝𝐲', 'Pieris05@thu.closed.social'), 
+(7, 'Revolver', 'Revolver@thu.closed.social'), (8, 'Slyvia', 'xsw17@thu.closed.social'), 
+(9, 'Recursion', 'Recursion@thu.closed.social'), (10, 'TA', 'TA@thu.closed.social'), 
+(11, 'Vagus.', 'NGC7841@thu.closed.social'), (12, 'aliceZ', 'aliceZ@thu.closed.social');
+
+INSERT INTO User_List VALUES
+(1, '于于飞', NULL), (2, 'Recursion', NULL), (3, 'shb', NULL), (4, '甜心甜心甜', NULL), (5, 'MonsterEnergy', NULL), 
+(6, '栗quor', NULL), (7, 'JasonL', NULL), (8, 'Novacaine', NULL), (9, 'weedeeweed', NULL), (10, 'ahgggg', NULL), 
+(11, '每日xx文bot', NULL), (12, 'Observer', NULL), (13, 'Beanhum', NULL), (14, 'shrknswm', NULL), (15, 'NanoApe', NULL), 
+(16, 'Rayna', NULL), (17, 'Anna Zhang', NULL), (18, '星辰之远', NULL), (19, '𝐑', NULL), (20, 'Stoicline', NULL), 
+(21, 'tree', NULL), (22, 'Jekyll', NULL), (23, 'xuxz23', NULL), (24, 'aliceZ', NULL), (25, '达达鸽', NULL), 
+(26, '瓜', NULL), (27, 'celso', NULL), (28, '闭社管理员', NULL), (29, 'Ismer', NULL), (30, 'TwilightSparkle 2.0', NULL), 
+(31, '𝙏𝙠𝙫𝙞 𝙄𝙁', NULL), (32, '裂娃', NULL), (33, '蜂蜜和奶', NULL), (34, 'iotac', NULL), (35, '烟水思恒', NULL), 
+(36, 'Iew Sinatra', NULL), (37, 'Huxley', NULL), (38, 'isaac_foster', NULL), (39, 'ouuan', NULL), (40, 'NN708', NULL), 
+(41, '敢敢的虚度日常', NULL), (42, '酸奶冻', NULL), (43, '𝐓𝐞𝐝𝐝𝐲', NULL), (44, 'Fris', NULL), (45, 'Vagus.', NULL), 
+(46, 'Revolver', NULL), (47, 'TwilightSparkle', NULL), (48, 'hadiil', NULL), (49, '驰雨Chiyuru', NULL), (50, 'ydc', NULL), 
+(51, 'TA', NULL), (52, 'shephV', NULL), (53, 'palacios', NULL), (54, 'EBTeddy', NULL), (55, '茨月', NULL), 
+(56, '只 狼', NULL), (57, 'yukiyaki', NULL), (58, 'Esythium', NULL), (59, 'DdIiMmHh', NULL), (60, 'Slyvia', NULL), 
+(61, 'ۋلانشىېنىيا', NULL), (62, 'Laniakea', NULL), (63, 'QAF', NULL), (64, '伊澄不阴暗', NULL), (65, 'llysc', NULL), 
+(66, '小法师跑得快', NULL), (67, 'CosmoOri', NULL), (68, '欧醚', NULL), (69, 'Lycium', NULL), (70, 'SUPERX', NULL), 
+(71, '断子绝孙手', NULL), (72, '二次元刀酱—刀哥', NULL), (73, '清青小火锅', NULL), (74, 'Sweetlemon', NULL), (75, 'Etbxjw', NULL), 
+(76, 'neruko💤', NULL);
+
+INSERT INTO Location_List VALUES
+(1, '圆明园地铁站口', '北京市海淀区圆明园地铁站', 100),
+(2, '清华食堂', '北京市海淀区清华大学', 100),
+(3, '香山', '香山公园, 北京市海淀区', 60),
+(4, '紫荆书咖', '北京市海淀区紫荆书咖', 40),
+(5, '大钟寺', '北京市海淀区大钟寺', 30);
+
+INSERT INTO When_List VALUES
+(1, '2024-10-20 10:00:00+8', '2024-10-20 12:00:00+8'),
+(2, '2024-10-21 14:00:00+8', '2024-10-21 16:00:00+8'),
+(3, '2024-10-22 09:00:00+8', '2024-10-22 11:00:00+8'),
+(4, '2024-10-23 15:00:00+8', '2024-10-23 17:00:00+8'),
+(5, '2024-10-24 08:30:00+8', '2024-10-24 10:30:00+8');
+
+INSERT INTO Location_When VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3),
+(4, 4, 4),
+(5, 5, 5);
+
+INSERT INTO Request_List VALUES
+(1, '圆明园地铁站口的活动', true, 1),
+(2, '闭社一岁生日约饭', true, 2),
+(3, '香山公园登山', false, 3),
+(4, '紫荆书咖', false, 4),
+(5, '大钟寺活动', false, 5);
+
+INSERT INTO Event_Aggregation(event_Name, event_Description, participant_Limit, approval, organizer_ID, request_ID, location_when_ID) VALUES
+('约早睡吧', '说完晚安后必须关机！', 100, false, 54, NULL, NULL),
+('鬼笑石布鸽勒', '16:00圆明园地铁站口（B口）集合！路上发月饼！', 100, false, 12, NULL, NULL),
+('闭社一岁生日约饭', '晚饭 具体吃哪里可以再商量吧', 100, false, 52, NULL, NULL),
+('2020初雪局', '时间先暂定周六吧 地点再议 /@zyn/105237252749526296', 100, false, 52, NULL, NULL),
+('冬至之选！', '说到冬至，自然是饺子（划去）汤圆（划去）羊肉汤！会在闭聊里确定具体的时间地点安排，总归是20号的晚餐就是了', 100, false, 55, NULL, NULL),
+('闭社跨年', '8点到1点，紫荆书咖 /@zyn/105458387690265994', 100, false, 52, NULL, NULL),
+('鸽鸽鸽', '这项活动唯一的内容就是鸽鸽鸽，报名后你只需要鸽就好了QAQ', 100, false, 52, NULL, NULL),
+('年夜饭', '闭社年夜饭！', 100, false, 23, NULL, NULL),
+('清明爬山', 'https://articles.closed.social/', 100, false, 12, NULL, NULL),
+('午饭lunchtagmanĝo', '12:00，玉树，不出示截图也能有水浴加热的花椒红豆粽子（出示万一能吃俩呢 :doge: ', 100, false, 55, NULL, NULL),
+('线上打牌/下棋', '具体时间待定，看大家的时间', 100, false, 63, NULL, NULL),
+('休闲香山行', '香山休闲路线，逃票进植物园。欢迎报名便于统计人数，不过也欢迎匿名参与，到时候直接来集合就行。', 100, false, 65, NULL, NULL),
+('本周五晚平安夜社聚', '聚餐：时间、地点、形式未定；已借C楼教室*1：【21：00-23：00】可桌游；自带一支四玫瑰波本，小酌与否完全自愿', 100, false, 3, NULL, NULL),
+('本周五晚平安夜吃饭', '聚餐地点：东南门外安妮意大利餐厅，具体时间看@jean预约 【和校内桌游独立，来去随意】', 100, false, 3, NULL, NULL),
+('五一野餐&amp;桌游', '尝试发一个鸽鸽鸽quq大概5.3下午？雕塑园或者湖心岛的草坪都很适合野餐，桌游的话我有uno和三国杀大家也可以带点别的！', 100, false, 45, NULL, NULL),
+('毕业紫操夜聊局', '21：00紫操北侧的球门下见，我会戴一条橙色发带，希望今年毕业的社友们都能来玩，大家可以带点喝的。', 100, false, 64, NULL, NULL),
+('【中秋x开学】社聚', '晚 21:00，赏月&amp;交换月饼&amp;吐槽新学期（？），桌游什么的就随缘吧hhh', 100, false, 28, NULL, NULL),
+('约酒 or 约饭？', '打算晚上（大概是七点之后？）出去玩（吃吃喝喝），怎么写文案呢？要不就这样吧，时间地点都不太确定的样子，可以之后视随行人员再商量…', 100, false, 29, NULL, NULL),
+('毕业季闭社社聚GO！', '请大家在6月24日晚19:30于C楼前的小空地集合，可以带上自己喜爱的游戏或是食物，与各位社友一起迎接2023年毕业季的闭社社聚', 100, false, 37, NULL, NULL),
+('西操小聚', '西操，大概 19 点', 100, false, 28, NULL, NULL),
+('社聚！', '懂的来', 100, false, 1, NULL, NULL),
+('毕业社聚🎈', '下午看看能不能组队看展（？）晚上约饭 之后再说x', 100, false, 1, NULL, NULL);
+
+INSERT INTO Notification_List VALUES
+(1, '圆明园', '关于圆明园地铁站口的活动通知', '2024-10-19 09:00:00+8', 2),
+(2, '清华食堂', '关于清华食堂的活动通知', '2024-10-20 10:30:00+8', 3),
+(3, '香山的活动', '关于香山的活动通知', '2024-10-21 11:00:00+8', 12),
+(4, '紫荆书咖', '关于紫荆书咖的活动通知', '2024-10-22 09:00:00+8', 6),
+(5, '社聚！', '关于大钟寺的活动通知', '2024-10-23 11:00:00+8', 21);
+
+INSERT INTO User_Event VALUES(54, 1),
+(35, 1), (68, 1), (67, 1), (60, 1), (34, 1), (21, 1), (23, 1), (8, 2), (43, 2), (15, 2), 
+(9, 2), (60, 2), (36, 2), (68, 3), (36, 3), (8, 3), (60, 3), (66, 3), (14, 3), (3, 3), 
+(68, 4), (8, 4), (43, 4), (9, 4), (59, 4), (5, 4), (29, 4), (60, 4), (3, 4), (36, 5), 
+(8, 5), (68, 5), (60, 5), (9, 5), (69, 5), (68, 6), (36, 6), (8, 6), (43, 6), (70, 6), 
+(5, 6), (34, 6), (17, 6), (57, 6), (9, 6), (54, 6), (69, 6), (10, 6), (68, 7), (15, 7), 
+(8, 7), (2, 7), (34, 7), (18, 7), (26, 7), (44, 7), (4, 7), (57, 7), (37, 7), (29, 7), 
+(9, 7), (5, 7), (3, 7), (27, 7), (36, 7), (59, 7), (12, 7), (41, 7), (1, 7), (58, 7), 
+(71, 7), (73, 7), (56, 7), (31, 7), (28, 8), (51, 8), (71, 8), (8, 8), (27, 8), (3, 8), 
+(42, 8), (16, 8), (8, 9), (68, 9), (50, 9), (70, 9), (11, 9), (43, 9), (36, 9), (36, 10), 
+(3, 10), (8, 10), (57, 10), (59, 10), (70, 10), (10, 10), (9, 10), (27, 10), (57, 11), (3, 11), 
+(11, 11), (36, 11), (59, 11), (70, 11), (61, 12), (11, 12), (60, 12), (51, 12), (62, 12), (38, 12), 
+(70, 13), (34, 13), (8, 13), (61, 13), (53, 13), (24, 13), (63, 13), (69, 13), (70, 14), (8, 14), 
+(61, 14), (24, 14), (69, 14), (53, 14), (34, 14), (45, 15), (32, 15), (2, 15), (8, 15), (76, 15), 
+(72, 15), (6, 15), (43, 15), (61, 15), (29, 15), (49, 15), (65, 15), (46, 15), (13, 15), (70, 15), 
+(40, 15), (24, 15), (64, 15), (62, 16), (8, 16), (3, 16), (76, 16), (51, 16), (13, 16), (6, 16), 
+(51, 17), (76, 17), (49, 17), (55, 17), (39, 17), (40, 17), (25, 17), (53, 17), (20, 17), (62, 17), 
+(74, 17), (7, 17), (47, 18), (46, 18), (76, 18), (52, 18), (62, 18), (7, 18), (74, 18), (52, 19), 
+(33, 19), (76, 19), (51, 19), (62, 19), (37, 19), (51, 20), (24, 20), (39, 20), (49, 20), (76, 20), 
+(50, 20), (22, 20), (76, 21), (49, 21), (7, 21), (62, 21), (39, 21), (48, 21), (74, 21), (19, 21), 
+(76, 22), (30, 22), (15, 22), (74, 22), (75, 22), (50, 22);
