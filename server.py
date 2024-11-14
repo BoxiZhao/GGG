@@ -7,18 +7,22 @@ from flask import Flask, request, render_template, g, redirect, Response, sessio
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
-app.secret_key = 'bz2540'
+app.secret_key = '670296'
 
-DATABASEURI = "postgresql://bz2540:bz2540@w4111.cisxo09blonu.us-east-1.rds.amazonaws.com/w4111"
+DATABASEURI = "postgresql://postgres:670296@localhost/postgres"
 engine = create_engine(DATABASEURI)
 
 with open('Create_Table.txt', 'r', encoding="utf-8") as f:
 	createTableSQL = f.read()
-	engine.execute(createTableSQL)
+	#不知道是不是版本冲突，直接engine不上
+	with engine.connect() as connection:
+    connection.execute(createTableSQL)
+
 
 with open('Initial_Data.txt', 'r', encoding="utf-8") as f:
 	initialDataSQL = f.read()
-	engine.execute(initialDataSQL)
+	with engine.connect() as connection:
+    connection.execute(initialDataSQL)
 
 # they should be read out from the database
 userRange = range(1, 77)
@@ -119,7 +123,7 @@ if __name__ == "__main__":
 	@click.option('--debug', is_flag=True)
 	@click.option('--threaded', is_flag=True)
 	@click.argument('HOST', default='0.0.0.0')
-	@click.argument('PORT', default=8111, type=int)
+	@click.argument('PORT', default=8224, type=int)
 
 	def run(debug, threaded, host, port):
 		HOST, PORT = host, port
