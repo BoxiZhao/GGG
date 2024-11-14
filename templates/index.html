@@ -55,11 +55,15 @@
 
   </div>
 
-{% if not login %}
-<p><form action="/login" method="get"><input type="submit" value="Log In"></p>
-{% else %}
+{% if userID %}
 <p><a href="/addevent">Add an Event</a></p>
 <p><form action="/logout" method="post"><input type="submit" value="Log Out"></p>
+{% else %}
+<p><form action="/login" method="get"><input type="submit" value="Log In"></p>
+{% endif %}
+
+{% if adminID %}
+<p><a href="/requests">View Requests</a></p>
 {% endif %}
 
 </body>

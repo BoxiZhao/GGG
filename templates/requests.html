@@ -1,0 +1,58 @@
+<html>
+<head>
+  <style>
+    .elp_100{
+      width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .elp_200{
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .elp_400{
+      width: 400px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .thead{
+      text-align: left;
+    }
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Requests</h1>
+  <div>
+    <table class="table table-bordered table-striped">
+      <thead class="thead">
+        <tr>
+          <th>Request ID</th>
+          <th>Comment</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+          <tr>
+            <td><div class='elp_100'><a href={{item[3]}}>{{item[0]}}</div></td>
+            <td><div class='elp_200'>{{item[1]}}</div></td>
+            <td><div class='elp_200'>{{item[2]}}</div></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+<p><a href="/">Back</a></p>
+
+</body>
+</html>

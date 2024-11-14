@@ -1,0 +1,77 @@
+<html>
+<head>
+  <style>
+    .elp_100{
+      width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .elp_200{
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .elp_400{
+      width: 400px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .thead{
+      text-align: left;
+    }
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+</head>
+
+
+<body>
+  <h1>Request No.{{requestID}}</h1>
+
+  <div>
+	<table class="table table-bordered table-striped">
+	  <thead class="thead">
+	    <tr>
+	      <th>Event Name</th>
+	      <th>Description</th>
+	      <th>Organizer</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		{% for item in data %}
+		  <tr>
+		    <td><div class='elp_200'>{{item[0]}}</div></td>
+		    <td><div class='elp_400'>{{item[1]}}</div></td>
+		    <td><div class='elp_100'>{{item[2]}}</div></td>
+		  </tr>
+		{% endfor %}
+	  </tbody>
+	</table>
+  </div>
+
+<br />
+<br />
+<form action="/review" method="post">
+
+	{% if reviewed %}
+	<p>Reviewed</p>
+	{% else %}
+	<label for="feedback">Approve?</label>
+	<select name="feedback">
+	  <option value=1>YES</option>
+	  <option value=-1>NO</option>
+	</select>
+	<p><input type="submit" value="Confrim"></p>
+	{% endif %}
+
+</form>
+
+<p><a href="/requests">Back</a></p>
+
+</body>
+</html>

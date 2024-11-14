@@ -1,7 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .elp_100{
+      width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .elp_200{
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .elp_400{
+      width: 400px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .thead{
+      text-align: left;
+    }
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+  
+  <title>Event Details</title>
+</head>
+
+<body>
+
+<h1>{{ eventDetail[0] }}</h1> <!-- Event Name -->
+
+<p><strong>Description:</strong> {{ eventDetail[1] }}</p> <!-- Event Description -->
+
+<p><strong>Location:</strong> {{ eventDetail[2] }}</p> <!-- Location Name -->
+
+<p><strong>Start Time:</strong> {{ eventDetail[3] }}</p> <!-- Start Time -->
+
+<p><strong>End Time:</strong> {{ eventDetail[4] }}</p> <!-- End Time -->
+
+{% if userID %}
 <form action="/register" method="post">
 
-    <p>{{eventID}}</p>
-    
+  {% if registered %}
+  	<h2>- Notifications -</h2>
+	<table class="table table-bordered table-striped">
+	  <thead class="thead">
+        <tr>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Post Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in notificationList %}
+          <tr>
+            <td><div class='elp_200'>{{item[0]}}</div></td>
+            <td><div class='elp_400'>{{item[1]}}</div></td>
+            <td><div class='elp_200'>{{item[2]}}</div></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  {% else %}
     <p><input type="submit" value="Register"></p>
 
+  {% endif %}
 </form>
+
+  {% if isOrganizer %}
+    <p><form action="/addnotification"><input type="submit" value="Add Notification"></p>
+  {% endif %}
+
+{% endif %}
+<p><a href="/">Back</a></p>
+
+</body>
+</html>
