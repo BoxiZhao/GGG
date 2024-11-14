@@ -1,7 +1,3 @@
-DROP SCHEMA IF EXISTS bz2540 CASCADE;
-CREATE SCHEMA bz2540;
-SET SCHEMA 'bz2540';
-
 DROP TABLE IF EXISTS Admin_List CASCADE;
 CREATE TABLE Admin_List(
     admin_ID INT PRIMARY KEY,
@@ -20,7 +16,7 @@ DROP TABLE IF EXISTS Request_List CASCADE;
 CREATE TABLE Request_List(
     request_ID INT PRIMARY KEY,
     request_Comment TEXT,
-    request_Approval BOOL,
+    request_Approval INT,
     admin_ID INT,
     FOREIGN KEY(admin_ID) REFERENCES Admin_List(admin_ID)
 );
@@ -57,7 +53,6 @@ CREATE TABLE Event_Aggregation(
     event_Name VARCHAR(255) NOT NULL,
     event_Description TEXT,
     participant_Limit INT,
-    approval BOOL,
     organizer_ID INT NOT NULL,
     FOREIGN KEY(organizer_ID) REFERENCES User_List(user_ID),
     request_ID INT,
@@ -68,7 +63,7 @@ CREATE TABLE Event_Aggregation(
 
 DROP TABLE IF EXISTS Notification_List CASCADE;
 CREATE TABLE Notification_List (
-    notification_ID INT,
+    notification_ID serial,
     notification_Title VARCHAR(255),
     notification_Content TEXT,
     post_Time TIMESTAMP,
