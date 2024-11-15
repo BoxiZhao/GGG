@@ -78,6 +78,8 @@
 
   {% if isOrganizer %}
     <p><form action="/addnotification"><input type="submit" value="Add Notification"></p>
+  {% else %}
+    <p>Only the organizer can add notifications.</p>
   {% endif %}
 
 {% endif %}
