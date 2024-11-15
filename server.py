@@ -104,21 +104,61 @@ def add_event():
 		eventCounter = cursor.all()[0][0] + 1
 		cursor.close()
 
+		locationCapacity = 'NULL' if request.form['locationCapacity']=='' else request.form['locationCapacity']
+		cmd = 'INSERT INTO Location_List VALUES (:location_ID, :location_Name, :location_Address, %s)' % str(locationCapacity)
+		g.conn.execute(
+			text(cmd),
+			location_ID = eventCounter,
+			location_Name = request.form['locationName'],
+			location_Address = request.form['locationAddress'],
+			location_Capacity = locationCapacity
+		)
+
+		# 2024-11-14T19:28 -> '2024-11-14 19:28:00-5'
+		timeStart = 'NULL' if request.form['timeStart']=='' else '\''+request.form['timeStart'].replace('T', ' ')+':00-5\''
+		timeEnd = 'NULL' if request.form['timeEnd']=='' else '\''+request.form['timeEnd'].replace('T', ' ')+':00-5\''
+		print(timeStart, timeEnd)
+		cmd = 'INSERT INTO When_List VALUES (:when_ID, %s, %s)' % (timeStart, timeEnd)
+		g.conn.execute(
+			text(cmd),
+			when_ID = eventCounter
+		)
+		
+		cmd = 'INSERT INTO Location_When VALUES (:location_when_ID, :location_ID, :when_ID)'
+		g.conn.execute(
+			text(cmd),
+			location_when_ID = eventCounter,
+			location_ID = eventCounter,
+			when_ID = eventCounter
+		)
+
 		cmd = 'INSERT INTO Request_List(request_ID, request_Comment, request_Approval) VALUES (:request_ID, :request_Comment, 0)'
 		g.conn.execute(
 			text(cmd),
 			request_ID = eventCounter,
-			request_Comment = request.form['event_Name']
+			request_Comment = request.form['eventName']
 		)
 
-		cmd = 'INSERT INTO Event_Aggregation(event_Name, event_Description, participant_Limit, organizer_ID, request_ID) VALUES (:event_Name, :event_Description, :participant_Limit, :organizer_ID, :request_ID)'
+		participantLimit = 'NULL' if request.form['participantLimit']=='' else request.form['participantLimit']
+		cmd = """
+		INSERT INTO Event_Aggregation(event_Name, event_Description, participant_Limit, organizer_ID, request_ID, location_when_ID)
+		VALUES (:event_Name, :event_Description, %s, :organizer_ID, :request_ID, :location_when_ID)
+		""" % str(participantLimit)
 		g.conn.execute(
 			text(cmd),
-			event_Name = request.form['event_Name'],
-			event_Description = request.form['event_Description'],
-			participant_Limit = request.form['participant_Limit'],
+			event_Name = request.form['eventName'],
+			event_Description = request.form['eventDescription'],
+			participant_Limit = participantLimit,
 			organizer_ID = session['userID'],
-			request_ID = eventCounter
+			request_ID = eventCounter,
+			location_when_ID = eventCounter
+		)
+
+		cmd = 'INSERT INTO User_Event VALUES (:user_ID, :event_ID)'
+		g.conn.execute(
+			text(cmd),
+			user_ID = session['userID'],
+			event_ID = eventCounter
 		)
 		return redirect('/')
 

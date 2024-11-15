@@ -33,8 +33,7 @@ DROP TABLE IF EXISTS When_List CASCADE;
 CREATE TABLE When_List(
     when_ID INT PRIMARY KEY,
     time_Start TIMESTAMP,
-    time_End TIMESTAMP,
-    CHECK (time_End > time_Start)
+    time_End TIMESTAMP
 );
 
 DROP TABLE IF EXISTS Location_When CASCADE;
