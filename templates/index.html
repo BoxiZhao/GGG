@@ -29,9 +29,24 @@
   </style>
 </head>
 
-
 <body>
   <h1>Activities</h1>
+
+  <!-- Search Forms for Querying -->
+  <div>
+    <form action="/" method="get">
+      <label for="event_name">Search by: </label>
+      <input type="text" id="event_name" name="event_name" placeholder="Event name">
+      
+      <label for="description"> </label>
+      <input type="text" id="description" name="description" placeholder="Description">
+      
+      <label for="organizer"> </label>
+      <input type="text" id="organizer" name="organizer" placeholder="Organizer">
+      
+      <input type="submit" value="Search">
+    </form>
+  </div>
 
   <div>
     <table class="table table-bordered table-striped">
@@ -45,27 +60,27 @@
       <tbody>
         {% for item in data %}
           <tr>
-            <td><div class='elp_200'><a href={{item[3]}}>{{item[0]}}</div></td>
+            <td><div class='elp_200'><a href={{item[3]}}>{{item[0]}}</a></div></td>
             <td><div class='elp_400'>{{item[1]}}</div></td>
             <td><div class='elp_100'>{{item[2]}}</div></td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
-
   </div>
 
-{% if userID %}
-<p><a href="/addevent">Add an Event</a></p>
-<p><form action="/logout" method="post"><input type="submit" value="Log Out"></p>
-{% else %}
-<p><form action="/login" method="get"><input type="submit" value="Log In"></p>
-{% endif %}
+  {% if userID %}
+    <p><a href="/addevent">Add an Event</a></p>
+    <p><a href="/notifications">My notifications</a></p>
+    <p><form action="/logout" method="post"><input type="submit" value="Log Out"></form></p>
+  {% else %}
+    <p><form action="/login" method="get"><input type="submit" value="Log In"></form></p>
+  {% endif %}
 
-{% if adminID %}
-<p><a href="/requests">View Requests</a></p>
-{% endif %}
+  {% if adminID %}
+    <p><a href="/requests">View Requests</a></p>
+    <p><a href="/statistics">View Statistics</a></p>
+  {% endif %}
 
 </body>
-
 </html>

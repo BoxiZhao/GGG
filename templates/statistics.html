@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <style>
+        .elp_100{
+          width: 100px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+        .elp_200{
+          width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+        .elp_400{
+          width: 400px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+        body{ 
+          font-size: 15pt;
+          font-family: arial;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Users Sorted by Event Registrations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th><div class='elp_100'>User ID</div></th>
+                <th><div class='elp_200'>User Name</div></th>
+                <th><div class='elp_200'>Event Count</div></th>
+            </tr>
+        </thead>
+    </table>
+    <div style="height: 300px;width: 500px;overflow-y: scroll"><table>
+        <tbody>
+            {% for user in sorted_users %}
+            <tr>
+                <td><div class='elp_100'>{{ user.user_ID }}</div></td>
+                <td><div class='elp_200'>{{ user.user_Name }}</div></td>
+                <td><div class='elp_100'>{{ user.event_Count }}</div></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table></div>
+
+    <br><br>
+
+    <h2>Users with Common Events</h2>
+    <table>
+        <thead>
+            <tr>
+                <th><div class='elp_200'>Users</div></th>
+                <th><div class='elp_200'></div></th>
+                <th><div class='elp_200'>Common Events</div></th>
+            </tr>
+        </thead>
+    </table>
+    <div style="height: 300px;width: 600px;overflow-y: scroll"><table>
+        <tbody>
+            {% for user in common_users %}
+            <tr>
+                <td><div class='elp_200'>{{ user.name_1 }}</div></td>
+                <td><div class='elp_200'>{{ user.name_2 }}</div></td>
+                <td><div class='elp_100'>{{ user.common_Count }}</div></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table></div>
+
+    <br><br>
+    <p><a href="/">Back</a></p>
+
+</body>
+</html>

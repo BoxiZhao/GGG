@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications</title>
+    <style>
+        .elp_100{
+          width: 100px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+        .elp_200{
+          width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+        .elp_400{
+          width: 400px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+        .thead{
+          text-align: left;
+        }
+        body{ 
+          font-size: 15pt;
+          font-family: arial;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Notifications</h1>
+    <table>
+        <thead class='thead'>
+            <tr>
+                <th>Event</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Post Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notification in notifications %}
+            <tr>
+                <td><div class='elp_200'>{{ notification.event_Name }}</td>
+                <td><div class='elp_200'>{{ notification.notification_Title }}</td>
+                <td><div class='elp_400'>{{ notification.notification_Content }}</td>
+                <td><div class='elp_200'>{{ notification.post_Time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+    <p><a href="/">Back</a></p>
+    
+</body>
+</html>
